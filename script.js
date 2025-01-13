@@ -1,8 +1,8 @@
 // 工具函数：格式化金额
 function formatMoney(amount) {
     return new Intl.NumberFormat('zh-CN', {
-        style: 'currency',
-        currency: 'CNY'
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
     }).format(amount);
 }
 
@@ -359,7 +359,7 @@ function saveToHistory(calculationResult) {
     updateHistoryDisplay();
 }
 
-// 更新历史记录显示
+// 修改更新历史记录显示的函数
 function updateHistoryDisplay() {
     const historyList = document.getElementById('historyList');
     const history = JSON.parse(localStorage.getItem('calculationHistory') || '[]');
