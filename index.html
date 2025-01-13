@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提前还贷计算器</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>提前还贷计算器</h1>
+        
+        <div class="main-content">
+            <div class="history-section">
+                <h2><i class="fas fa-history"></i> 历史记录</h2>
+                <div class="history-list" id="historyList">
+                    <!-- 历史记录将通过 JS 动态添加 -->
+                </div>
+            </div>
+
+            <div class="calculator-section">
+                <div class="input-section">
+                    <h2><i class="fas fa-calculator"></i> 贷款信息</h2>
+                    <div class="input-group">
+                        <label for="loanAmount"><i class="fas fa-money-bill-wave"></i> 贷款总额</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="loanAmount" step="0.01" placeholder="请输入贷款总额">
+                            <span class="unit">万元</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="loanYears"><i class="fas fa-clock"></i> 贷款年限</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="loanYears" placeholder="请输入贷款年限">
+                            <span class="unit">年</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="interestRate"><i class="fas fa-percent"></i> 年利率</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="interestRate" step="0.01" placeholder="请输入年利率">
+                            <span class="unit">%</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="startDate"><i class="fas fa-calendar-alt"></i> 开始时间</label>
+                        <div class="date-picker">
+                            <input type="text" id="startDate" placeholder="例如: 202006">
+                            <div class="date-selects">
+                                <select id="startYear" class="year-select"></select>
+                                <select id="startMonth" class="month-select"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="prepayDate"><i class="fas fa-calendar-check"></i> 提前还款</label>
+                        <div class="date-picker">
+                            <input type="text" id="prepayDate" placeholder="例如: 202412">
+                            <div class="date-selects">
+                                <select id="prepayYear" class="year-select"></select>
+                                <select id="prepayMonth" class="month-select"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="prepayAmount"><i class="fas fa-hand-holding-usd"></i> 还款金额</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="prepayAmount" step="0.01" placeholder="请输入提前还款金额">
+                            <span class="unit">万元</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="paymentMethod"><i class="fas fa-sync-alt"></i> 还款方式</label>
+                        <select id="paymentMethod">
+                            <option value="equalInstallment">等额本息</option>
+                            <option value="equalPrincipal">等额本金</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="prepaymentMethod"><i class="fas fa-random"></i> 提前还款</label>
+                        <select id="prepaymentMethod">
+                            <option value="reducePeriod">缩短还款期限</option>
+                            <option value="reduceAmount">减少月供金额</option>
+                        </select>
+                    </div>
+                    <button id="calculate"><i class="fas fa-calculator"></i> 计算</button>
+                </div>
+
+                <div class="result-section">
+                    <h2><i class="fas fa-chart-bar"></i> 计算结果</h2>
+                    <table class="result-table">
+                        <thead>
+                            <tr>
+                                <th>对比项目</th>
+                                <th>原还款计划</th>
+                                <th>提前还款方案</th>
+                                <th>节省/变化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>总利息</td>
+                                <td id="originalInterest">-</td>
+                                <td id="newInterest">-</td>
+                                <td id="savedInterest" class="highlight">-</td>
+                            </tr>
+                            <tr>
+                                <td>月供</td>
+                                <td id="originalMonthly">-</td>
+                                <td id="newMonthly">-</td>
+                                <td id="monthlyDiff">-</td>
+                            </tr>
+                            <tr>
+                                <td>还款期限</td>
+                                <td id="originalEndDate">-</td>
+                                <td id="newEndDate">-</td>
+                                <td id="monthsDiff">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
